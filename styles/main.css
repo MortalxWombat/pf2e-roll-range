@@ -1,0 +1,26 @@
+.pf2e-roll-range {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid var(--color-border-light-primary);
+    font-size: 0.9em;
+}
+
+.pf2e-roll-range-values {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.pf2e-roll-range-value {
+    flex: 1;
+    text-align: center;
+}
+
+.pf2e-roll-range-label {
+    margin-bottom: 2px;
+    font-weight: bold;
+}
+
+.pf2e-roll-range-number {
+    font-variant-numeric: tabular-nums;
+}
