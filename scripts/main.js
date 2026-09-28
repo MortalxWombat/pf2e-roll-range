@@ -2,14 +2,6 @@ const MODULE_ID = "pf2e-roll-range";
 
 
 /**
- * Returns true if the message was rolled by a player character.
- */
-function isPlayerCharacterMessage(message) {
-    return message.speakerActor?.type === "character";
-}
-
-
-/**
  * PF2e damage rolls expose their damage components as instances.
  */
 function isDamageRoll(roll) {
@@ -58,7 +50,7 @@ function calculateDamageRange(roll) {
 
 
 Hooks.on("createChatMessage", async message => {
-    if (!message.rolls?.length || !isPlayerCharacterMessage(message)) {
+    if (!message.rolls?.length) {
         return;
     }
 
