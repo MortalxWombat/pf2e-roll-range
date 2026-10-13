@@ -1,8 +1,9 @@
+
 {
   "id": "pf2e-roll-range",
   "title": "PF2e Roll Range",
-  "description": "Displays the minimum, average, and maximum possible damage for damage rolls, with optional target-aware immunities, weaknesses, and resistances.",
-  "version": "1.2.0",
+  "description": "Displays minimum, average, and maximum possible damage for Pathfinder 2e damage rolls, with optional target-adjusted immunities, weaknesses, and resistances.",
+  "version": "1.3.0",
   "authors": [
     {
       "name": "Mortal Wombat"
@@ -30,9 +31,6 @@
       }
     ]
   },
-  "url": "https://github.com/MortalxWombat/pf2e-roll-range",
-  "manifest": "https://github.com/MortalxWombat/pf2e-roll-range/releases/latest/download/module.json",
-  "download": "https://github.com/MortalxWombat/pf2e-roll-range/releases/download/v1.2.0/pf2e-roll-range.zip",
   "esmodules": [
     "scripts/main.js"
   ],
