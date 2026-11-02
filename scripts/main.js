@@ -43,6 +43,14 @@ function isDamageRoll(roll) {
     return Array.isArray(roll.instances) && roll.instances.length > 0;
 }
 
+function isPublicRoll(message) {
+    return !message.blind &&
+        !message.whisper?.length &&
+        !message.flags?.core?.rollMode?.includes("selfroll") &&
+        !message.flags?.core?.rollMode?.includes("gmroll") &&
+        !message.flags?.core?.rollMode?.includes("blindroll");
+}
+
 function getTargetTokens() {
     const targets = Array.from(game.user.targets);
     const allowMultiple = game.settings.get(MODULE_ID, "multipleTargets");
@@ -435,9 +443,7 @@ function buildRanges(roll, message, mode, targets, basicRange) {
         }
 
         ranges.push({
-            label: hasMultipleTargets
-                ? formatTargetNames(group.names)
-                : mode === "both" ? "Target IWR" : "",
+            label: formatTargetNames(group.names),
             names: [],
             min: group.min,
             average: group.average,
@@ -522,6 +528,9 @@ Hooks.on("createChatMessage", async message => {
     if (!message.isAuthor) return;
     if (!message.rolls?.length) return;
 
+    // Do not calculate or store ranges for nonpublic rolls.
+    if (!isPublicRoll(message)) return;
+
     const roll = message.rolls[0];
 
     if (!isDamageRoll(roll)) return;
@@ -571,6 +580,10 @@ Hooks.on("createChatMessage", async message => {
 });
 
 Hooks.on("renderChatMessage", (message, html) => {
+    // Never display our statistics on nonpublic rolls,
+    // including older messages that may contain range flags.
+    if (!isPublicRoll(message)) return;
+
     const ranges = message.getFlag(
         MODULE_ID,
         "ranges"
